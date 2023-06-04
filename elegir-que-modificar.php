@@ -48,12 +48,11 @@ logConfirm($pageName);
             Seleccione el atributo a modificar:
         </p>
         <select class="form-select" aria-label="Default select example">
-            <option selected>Seleccione de este menú</option>
-            <option value="1">Número</option>
-            <option value="2">Nombre</option>
-            <option value="3">Foto</option>
-            <option value="4">Descripción</option>
-            <option value="5">Habilidades</option>
+            <option value="pokename">Nombre</option>
+            <option value="photo">Foto</option>
+            <option value="summary">Descripción</option>
+            <option value="abiltyA">Habilidad A</option>
+            <option value="abilityB">Habilidad B</option>
           </select>
       </div>
   </div>

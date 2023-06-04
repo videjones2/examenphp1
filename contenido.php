@@ -1,9 +1,13 @@
 <?php 
 include 'conex.php';
+include 'elementor.php';
 logConfirm($pageName);
 $limit=1;
 if(isset($_GET["limit"])){
 $limit=$_GET["limit"];
+}
+if(isset($_GET["searcher"])){
+  $limit=1;
 }
 ?>
 <!doctype html>
@@ -27,25 +31,9 @@ $limit=$_GET["limit"];
             </nav>
       </div>
   </div>
-  <div id="navegacion" class="py-3">
-    <div class="container-xl">
-      <nav class="nav justify-content-end">
-        <ul class="nav justify-content-end nav-pills">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Información Remota</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Información Local</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Historial De Cambios</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="logout.php">Cerrar Sesion</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+  <?php 
+  Navbar($pageName);
+  ?>
     <div id="contenido" class="py-5">
       <div class="container-xl">
         <h1 class="text-center pb-5">
@@ -53,6 +41,13 @@ $limit=$_GET["limit"];
         </h1>
         <p class="text-center pb-5">Lista de Pokemon aleatoria extraida de la <a target="_blank" href="https://pokeapi.co/">PokeApi</a></p>
         <p class="text-center pb-5">Mostrando <?php echo($limit); ?> Pokemon</a></p>
+        <form method="GET">
+          <p>
+          Quieres Buscar a un Pokemon? Ingresa su numero registrado en la Pokedex
+          </p>
+          <input class="form-select" min="1" max="800" placeholder="Ingresa un numero del 1 al 800" type="number" name="searcher" value="<?php echo($_GET["searcher"]) ?>">
+          <button type="submit" class="btn btn-info">Buscar Pokemon</button>
+        </form>
         <table class="table">
           <thead>
             <tr>
@@ -67,6 +62,7 @@ $limit=$_GET["limit"];
           </thead>
           <tbody>
             <?php 
+            if(!isset($_GET["searcher"])){
             for($x=1;$x<=$limit;$x++){
             $randomnumber=rand(1,800);
             ?>
@@ -75,9 +71,20 @@ $limit=$_GET["limit"];
             </tr>          
             <?php 
             }
+            }
+            else{
+            ?>
+            <tr>
+              <?php pokefromApi($_GET["searcher"],$mysqli); ?>
+            </tr> 
+            <?php
+            }
             ?>
           </tbody>
         </table>
+        <?php 
+        Sorter($pageName,$limit);
+        ?>
       </div>
   </div>
 

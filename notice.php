@@ -1,6 +1,6 @@
-<?php 
-include 'conex.php';
-//if(isset($title)&&isset($error)){
+<?php
+include 'elementor.php';
+if(isset($title)&&isset($error)){
 if(!isset($backref)){
 $backref=$_SERVER['HTTP_REFERER'];
 }
@@ -27,7 +27,9 @@ $backref=$_SERVER['HTTP_REFERER'];
               </nav>
         </div>
     </div>
-
+    <?php 
+    Navbar($pageName);
+    ?>
     <div class="container text-center py-5" id="bienvenida">
         <div>
             <div class="card-body">
@@ -38,12 +40,12 @@ $backref=$_SERVER['HTTP_REFERER'];
                 <?php echo($error); ?>
               </h2>
               <?php if(isset($backref)){ ?>
-              <button type="button" class="btn btn-info">Volver</button>
+              <a href="<?php echo($backref); ?>" class="btn btn-info">Volver</a>
               <?php 
               } 
               if(isset($goref)){
               ?>
-              <button type="button" class="btn btn-info">Continuar</button>
+              <a href="<?php echo($goref); ?>" class="btn btn-info">Continuar</a>
               <?php 
               }
               ?>
@@ -56,5 +58,5 @@ $backref=$_SERVER['HTTP_REFERER'];
 </body>
 </html>
 <?php 
-//}
+}
 ?>

@@ -6,6 +6,7 @@ $logquery=mysqli_query($mysqli,"SELECT * from users where username='$username'")
 if($userarray=mysqli_fetch_array($logquery)){
 	if($userarray["pass"]==$pass){
 		$_SESSION["username"]=$username;
+		setcookie("cookieuser",$username);
 		header("location: contenido.php");
 	}
 	else{

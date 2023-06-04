@@ -1,5 +1,6 @@
-<?php 
+<?php
 include 'conex.php';
+include 'elementor.php';
 logConfirm($pageName);
 ?>
 <!doctype html>
@@ -23,22 +24,9 @@ logConfirm($pageName);
             </nav>
       </div>
   </div>
-  <div id="navegacion" class="py-3">
-    <div class="container-xl">
-      <nav class="nav justify-content-end">
-        <ul class="nav justify-content-end nav-pills">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Información Remota</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"  aria-current="page" href="#">Información Local</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Historial De Cambios</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+  <?php 
+  Navbar($pageName);
+  ?>
     <div id="contenido" class="py-5">
       <div class="container-xl">
         <h1 class="text-center pb-5">
@@ -51,26 +39,16 @@ logConfirm($pageName);
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Foto</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Autor</th>
                 <th scope="col">Descripción</th>
-                <th scope="col">Habilidades</th>
-                <th scope="col">Deshacer cambio</th>
-                <th scope="col">Recuperar información</th>
+                <th scope="col">Acción</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">722</th>
-                <td>Rowlet</td>
-                <td>
-                  <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/722.png" class="img-thumbnail" alt="rowlet">
-                </td>
-                <td>Es cauteloso, desconfiado y de naturaleza nocturna. Durante el día acumula energía mediante la fotosíntesis.</td>
-                <td>overgrow, long-reach</td>
-                <td><button type="button" class="btn btn-success">Deshacer Cambio</button></td>
-                <td><button type="button" class="btn btn-success">Recuperar Información</button></td>
-              </tr>          
+              <?php 
+              showChangelog($mysqli,$username);
+              ?>          
             </tbody>
           </table>
       </div>

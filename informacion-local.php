@@ -1,6 +1,33 @@
 <?php 
 include 'conex.php';
+include 'elementor.php';
 logConfirm($pageName);
+$limit=15;
+if(isset($_GET["limit"])){
+  $limit=$_GET["limit"];
+}
+$sortsql="SELECT * FROM pokedex order by captureTS DESC LIMIT $limit";
+$sorttext="Ordenados por Fecha de captura Descendente";
+if(isset($_GET["sort"])){
+  switch ($_GET["sort"]) {
+    case 'number_asc':
+        $sortsql="SELECT * FROM pokedex order by idnumber ASC LIMIT $limit";
+        $sorttext="Ordenados por Numero de Pokemon Descendente";
+        break;
+    case 'number_desc':
+        $sortsql="SELECT * FROM pokedex order by idnumber DESC LIMIT $limit";
+        $sorttext="Ordenados por Numero de Pokemon Descendente";
+        break;
+    case 'date_desc':
+        $sortsql="SELECT * FROM pokedex order by captureTS DESC LIMIT $limit";
+        $sorttext="Ordenados por Fecha de captura Descendente";
+        break;
+    case 'date_asc':
+        $sortsql="SELECT * FROM pokedex order by captureTS asc LIMIT $limit";
+        $sorttext="Ordenados por Fecha de captura Ascendente";
+        break;
+  } 
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -23,30 +50,20 @@ logConfirm($pageName);
             </nav>
       </div>
   </div>
-  <div id="navegacion" class="py-3">
-    <div class="container-xl">
-      <nav class="nav justify-content-end">
-        <ul class="nav justify-content-end nav-pills">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Información Remota</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active"  aria-current="page" href="#">Información Local</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Historial De Cambios</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+  <?php 
+  Navbar($pageName);
+  ?>
     <div id="contenido" class="py-5">
       <div class="container-xl">
         <h1 class="text-center pb-5">
           Información Local
         </h1>
         <p>
-            En esta sección podrá ver los cambios guardados localmente de la información obtenida en PokeAPI:
+            En esta sección podrá ver los cambios guardados localmente de la información obtenida en PokeAPI: <?php echo($sorttext); ?>
         </p>
+        <?php 
+        Sorter($pageName,$limit);
+        ?>
         <table class="table">
             <thead>
               <tr>
@@ -60,17 +77,9 @@ logConfirm($pageName);
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">722</th>
-                <td>Rowlet</td>
-                <td>
-                  <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/722.png" class="img-thumbnail" alt="rowlet">
-                </td>
-                <td>Es cauteloso, desconfiado y de naturaleza nocturna. Durante el día acumula energía mediante la fotosíntesis.</td>
-                <td>overgrow, long-reach</td>
-                <td><button type="button" class="btn btn-info">Modificar Información</button></td>
-                <td><button type="button" class="btn btn-danger">Eliminar Información</button></td>
-              </tr>          
+              <?php 
+              pokefromBD($mysqli,$sortsql);
+              ?>       
             </tbody>
           </table>
       </div>
