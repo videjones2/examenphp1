@@ -13,25 +13,13 @@ if(isset($_GET["searcher"])){
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bienvenido a la aplicación CRUD</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <?php 
+    Headstyle("Buscar Informacion");
+    ?>
   </head>
   <body>
-    <div id="header" class="bg-primary">
-      <div class="container-xl">
-          <nav class="navbar bg-primary" data-bs-theme="dark">
-              <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                  <img src="https://lofrev.net/wp-content/photos/2017/05/php_emblem.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                  Examen PHP 01
-                </a>
-              </div>
-            </nav>
-      </div>
-  </div>
-  <?php 
+  <?php
+  topHeader("Buscar Informacion"); 
   Navbar($pageName);
   ?>
     <div id="contenido" class="py-5">
@@ -43,7 +31,7 @@ if(isset($_GET["searcher"])){
         <p class="text-center pb-5">Mostrando <?php echo($limit); ?> Pokemon</a></p>
         <form method="GET">
           <p>
-          Quieres Buscar a un Pokemon? Ingresa su numero registrado en la Pokedex
+          Quieres Buscar a un Pokemon? Ingresa su numero registrado en la Pokedex, tal vez ya este dentro de nuestra base de datos
           </p>
           <input class="form-select" min="1" max="800" placeholder="Ingresa un numero del 1 al 800" type="number" name="searcher" value="<?php echo($_GET["searcher"]) ?>">
           <button type="submit" class="btn btn-info">Buscar Pokemon</button>

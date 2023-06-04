@@ -91,7 +91,7 @@ function pokefromApi($pokeNumber,$mysqli){//consigue los datos de un Pokemon esp
   }
   else{
     $statustext="Ya registrado";
-    $catchaction="No requiere capturar de nuevo";
+    $catchaction="<a href='elegir-que-modificar.php?id=".$pokeNumber."' class='btn btn-info'>Modificar Datos</a>";
   }
   ?>
   <td><?php echo($statustext); ?></td>
@@ -111,21 +111,24 @@ while($pokearray=mysqli_fetch_array($getpokedex)){
       <td><?php echo($pokearray['summary']) ?></td>
       <td><?php echo($pokearray['abilityA']) ?>, <?php echo($pokearray['abilityB']) ?></td>
       <td><a href="elegir-que-modificar.php?id=<?php echo($pokearray['idnumber']);  ?>" class="btn btn-info">Modificar Información</a></td>
-      <td><a href="elegir-que-eliminar.php" class="btn btn-danger">Eliminar Información</a></td>
+      <td><a href="elegir-que-eliminar.php?id=<?php echo($pokearray['idnumber']);  ?>" class="btn btn-danger">Eliminar Información</a></td>
     </tr>   
     <?php 
   }
 }
 
 function bringChangelog($autor,$dextarget,$comment,$mysqli,$undoquery){
+  $howmany=0;
   $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   $id = substr(str_shuffle($permitted_chars), 0, 20);
   $changequery=mysqli_query($mysqli,"INSERT into changelog(id,dextarget,autor,comentario) values ('$id','$dextarget','$autor','$comment')");
   $upquery=mysqli_query($mysqli,"UPDATE changelog set undoquery='$undoquery' where id='$id'");
+  
+
 }
 
 function showChangelog($mysqli,$username){
-  $summonLog=mysqli_query($mysqli,"SELECT * from changelog order by fecha desc");
+  $summonLog=mysqli_query($mysqli,"SELECT * from changelog order by fecha desc limit 10");
   while($changelog=mysqli_fetch_array($summonLog)){
   ?>
   <tr>

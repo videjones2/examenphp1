@@ -1,62 +1,53 @@
 <?php 
 include 'conex.php';
 logConfirm($pageName);
+if(!isset($_POST["pokenumber"])){
+?>
+<script>window.location.replace("informacion-local.php");</script>
+<?php
+}
+$pokenumber=$_POST["pokenumber"];
+$tabletarget=$_POST["tabletarget"];
+$getquery=mysqli_query($mysqli,"SELECT $tabletarget from pokedex where idnumber=$pokenumber");
+$data=mysqli_fetch_array($getquery);
+include 'elementor.php';
+
 ?>
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bienvenido a la aplicación CRUD</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <?php 
+    Headstyle("Modificando Información");
+    ?>
   </head>
   <body>
-    <div id="header" class="bg-primary">
-      <div class="container-xl">
-          <nav class="navbar bg-primary" data-bs-theme="dark">
-              <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                  <img src="https://lofrev.net/wp-content/photos/2017/05/php_emblem.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                  Examen PHP 01
-                </a>
-              </div>
-            </nav>
-      </div>
-  </div>
-  <div id="navegacion" class="py-3">
-    <div class="container-xl">
-      <nav class="nav justify-content-end">
-        <ul class="nav justify-content-end nav-pills">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Información Remota</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Información Local</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Historial De Cambios</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+  <?php 
+  topHeader("Modificando Información");
+  Navbar($pageName)
+  ?>
     <div id="contenido" class="py-5">
+      <form method="POST" action="updatepokemon.php">
       <div class="container-xl">
+        
+        <input type="hidden" name="pokenumber" value="<?php echo($pokenumber); ?>">
+        <input type="hidden" name="tabletarget" value="<?php echo($tabletarget); ?>">
         <h1 class="text-center pb-5">
-          Listado de Pokémon
+          Modificando información
         </h1>
         <p>
-            Edite la información de _________:
+            Edite la información de <?php echo($tabletarget); ?>:
         </p>
           <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <label for="exampleFormControlTextarea1" class="form-label">Modifique el campo aqui</label>
+            <textarea name="modbox" class="form-control" id="exampleFormControlTextarea1" rows="3"><?php echo($data[$tabletarget]) ?></textarea>
           </div>
           <div class="mb-3">
-            <button type="button" class="btn btn-secondary">Regresar</button>
-            <button type="button" class="btn btn-info">Guardar Cambio</button>
+            <a href="elegir-que-modificar.php?id=<?php echo($pokenumber); ?>" class="btn btn-secondary">Regresar</a>
+            <button type="submit" class="btn btn-info">Guardar Cambio</button>
         </div>
       </div>
-  </div>
+      </form>
+    </div>
 
   </div>
 

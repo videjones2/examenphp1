@@ -1,59 +1,47 @@
 <?php 
 include 'conex.php';
 logConfirm($pageName);
+if(!isset($_GET["id"])){
+  $backref="informacion-local.php";
+  $title="Aviso, debes definir un Pokemon";
+  $error="Vuelve a Informacion Local y elige un Pokemon de la lista ";
+  include 'notice.php';
+  exit();
+}
+include 'elementor.php';
+$pokenumber=$_GET["id"];
 ?>
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bienvenido a la aplicación CRUD</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <?php 
+    Headstyle("Modificar Información");
+    ?>
   </head>
   <body>
-    <div id="header" class="bg-primary">
-      <div class="container-xl">
-          <nav class="navbar bg-primary" data-bs-theme="dark">
-              <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                  <img src="https://lofrev.net/wp-content/photos/2017/05/php_emblem.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                  Examen PHP 01
-                </a>
-              </div>
-            </nav>
-      </div>
-  </div>
-  <div id="navegacion" class="py-3">
-    <div class="container-xl">
-      <nav class="nav justify-content-end">
-        <ul class="nav justify-content-end nav-pills">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Información Remota</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Información Local</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Historial De Cambios</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+  <?php 
+  topHeader("Modificar Información");
+  Navbar($pageName)
+  ?>
     <div id="contenido" class="py-5">
       <div class="container-xl">
+        <form method="POST" action="modificar-informacion.php">
+        <input type="hidden" name="pokenumber" value="<?php echo($pokenumber); ?>">
         <h1 class="text-center pb-5">
-          Listado de Pokémon
+          Modificar Informacion
         </h1>
         <p>
-            Seleccione el atributo a modificar:
+            Seleccione el atributo a modificar del Pokemon <?php echo($pokenumber); ?>:
         </p>
-        <select class="form-select" aria-label="Default select example">
+        <select name="tabletarget" class="form-select" aria-label="Default select example">
             <option value="pokename">Nombre</option>
             <option value="photo">Foto</option>
             <option value="summary">Descripción</option>
             <option value="abiltyA">Habilidad A</option>
             <option value="abilityB">Habilidad B</option>
           </select>
+          <button type="submit" class="btn btn-secondary">Continuar</button>
+        </form>
       </div>
   </div>
 

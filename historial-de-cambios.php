@@ -6,25 +6,13 @@ logConfirm($pageName);
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bienvenido a la aplicación CRUD</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <?php 
+    Headstyle("Historial de cambios");
+    ?>
   </head>
   <body>
-    <div id="header" class="bg-primary">
-      <div class="container-xl">
-          <nav class="navbar bg-primary" data-bs-theme="dark">
-              <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                  <img src="https://lofrev.net/wp-content/photos/2017/05/php_emblem.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                  Examen PHP 01
-                </a>
-              </div>
-            </nav>
-      </div>
-  </div>
   <?php 
+  topHeader("Historial de cambios");
   Navbar($pageName);
   ?>
     <div id="contenido" class="py-5">

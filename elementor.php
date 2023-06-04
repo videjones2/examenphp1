@@ -51,4 +51,28 @@ function Sorter($pageName,$limit){
 </form>
 <?php 
 }
+function Headstyle($whereami){
+?>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><?php echo($whereami); ?>||Examen PHP 01 - Joshua </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<?php 
+}
+function topHeader($whereami){
+?>
+<div id="header" class="bg-primary">
+      <div class="container-xl">
+          <nav class="navbar bg-primary" data-bs-theme="dark">
+              <div class="container-fluid">
+                <a class="navbar-brand" href="index.php">
+                  <img src="https://lofrev.net/wp-content/photos/2017/05/php_emblem.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                  Examen PHP 01 - <?php echo($whereami); ?>
+                </a>
+              </div>
+            </nav>
+      </div>
+    </div>
+<?php 
+}
 ?>
