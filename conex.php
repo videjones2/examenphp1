@@ -1,6 +1,6 @@
 <?php
 session_start();
-$mysqli = mysqli_connect('localhost','videroot','mellamojose','examenphp');//datos de conexion a la base de datos
+$mysqli = mysqli_connect('localhost','yourusername','yourpassword','examenphp');//datos de conexion a la base de datos
 $mysqli -> set_charset("utf8");
 if(isset($_SESSION["username"])){
 $username=$_SESSION["username"];
